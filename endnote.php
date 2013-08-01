@@ -9,11 +9,12 @@ class PHPEndNote {
 	* An indexed or hash array of references
 	* Each refernce has the following keys:
 	*	* authors - Array of authors
+	*	* address - String (optional)
 	*	* contact-name - String (optional)
 	*	* contact-email - String (optional)
 	*	* title - String
 	*	* title-secondary - String (optional)
-	*	* title-scientific - String (optional)
+	*	* title-short - String (optional)
 	*	* periodical-title - String (optional)
 	* 	* pages - String (optional)
 	*	* volume - String (optional)
@@ -49,35 +50,23 @@ class PHPEndNote {
 					$out .= '<author><style face="normal" font="default" size="100%">' . $author . '</style></author>';
 			$out .= '</authors></contributors>';
 
-			if (
-				(isset($ref['contact-name']) && $ref['contact-name'])
-				|| (isset($ref['contact-email']) && $ref['contact-email'])
-			) {
-				$out .= '<auth-address><style face="normal" font="default" size="100%">';
-				if ( (isset($ref['contact-name']) && $ref['contact-name']) && (isset($ref['contact-email']) && $ref['contact-email']) ) { // We have both
-					$out .= $ref['contact-name'] . ' - ' . $ref['contact-email'];
-				} elseif (isset($ref['contact-name']) && $ref['contact-name']) { // Just the name
-					$out .= $ref['contact-name'];
-				} elseif (isset($ref['contact-email']) && $ref['contact-email']) { // Just the email
-					$out .= $ref['contact-email'];
-				}
-				$out .= '</style></auth-address>';
-			}
-
 			$out .= '<titles>';
 				$out .= '<title><style face="normal" font="default" size="100%">' . $ref['title'] . '</style></title>';
 				$out .= '<secondary-title><style face="normal" font="default" size="100%">' . (isset($ref['title-secondary']) && $ref['title-secondary'] ? $ref['title-secondary'] : '') . '</style></secondary-title>';
-				$out .= '<short-title><style face="normal" font="default" size="100%">' . (isset($ref['title-scientific']) && $ref['title-scientific'] ? $ref['title-scientific'] : '') . '</style></short-title>';
+				$out .= '<short-title><style face="normal" font="default" size="100%">' . (isset($ref['title-short']) && $ref['title-short'] ? $ref['title-short'] : '') . '</style></short-title>';
 			$out .= '</titles>';
 
 				$out .= '<periodical><full-title><style face="normal" font="default" size="100%">' . (isset($ref['periodical-title']) && $ref['periodical-title'] ? $ref['periodical-title'] : '') . '</style></full-title></periodical>';
 
 			// Simple key values
 			foreach (array(
+				'auth-address' => 'address',
 				'pages' => 'pages',
 				'volume' => 'volume',
 				'number' => 'number',
 				'section' => 'section',
+				'abstract' => 'abstract',
+				'isbn' => 'isbn',
 			) as $enkey => $ourkey)
 				$out .= "<$enkey><style face=\"normal\" font=\"default\" size=\"100%\">" . (isset($ref[$ourkey]) && $ref[$ourkey] ? $ref[$ourkey] : '') . "</style></$enkey>";
 
@@ -86,8 +75,10 @@ class PHPEndNote {
 				$out .= '<pub-dates><date><style face="normal" font="default" size="100%">' . (isset($ref['year']) && $ref['year'] ? $ref['year'] : '') . '</style></date></pub-dates>';
 			$out .= '</dates>';
 
-			$out .= '<abstract><style face="normal" font="default" size="100%">' . (isset($ref['abstract']) && $ref['abstract'] ? $ref['abstract'] : '') . '</style></abstract>';
-			$out .= '<urls><related-urls><url><style face="normal" font="default" size="100%">' . (isset($ref['url']) && $ref['url'] ? $ref['url'] : '') . '</style></url></related-urls></urls>';
+			$out .= '<urls><related-urls>';
+				foreach ($urls as $url)
+					$out .= '<url><style face="normal" font="default" size="100%">' . $url . '</style></url>';
+			$out .= '</related-urls></urls>';
 			$out .= '<research-notes><style face="normal" font="default" size="100%">' . (isset($ref['notes']) && $ref['notes'] ? $ref['notes'] : '') . '</style></research-notes>';
 
 			$out .= '</record>';
