@@ -32,6 +32,24 @@ class PHPEndNote {
 	var $refs;
 
 	/**
+	* Add a reference to the $refs array
+	* This function also expands simple strings into arrays (suported: author => authors, url => urls)
+	* @param $ref array The array to add to the stack
+	*/
+	function Add($ref) {
+		// Expand singular -> plurals
+		foreach (array(
+			'author' => 'authors',
+			'url' => 'urls',
+		) as $single => $plural)
+			if (isset($ref[$single])) {
+				$ref[$plural] = array($ref[$single]);
+				unset($ref[$single]);
+			}
+		$this->refs[] = $ref;
+	}
+
+	/**
 	* Return the raw XML of the $refs array
 	* @see $refs
 	*/
