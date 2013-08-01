@@ -94,16 +94,20 @@ class PHPEndNote {
 				$out .= '<pub-dates><date><style face="normal" font="default" size="100%">' . (isset($ref['year']) && $ref['year'] ? $ref['year'] : '') . '</style></date></pub-dates>';
 			$out .= '</dates>';
 
-			$out .= '<urls><related-urls>';
-				foreach ($urls as $url)
-					$out .= '<url><style face="normal" font="default" size="100%">' . $url . '</style></url>';
-			$out .= '</related-urls></urls>';
+			if (isset($ref['urls']) && $ref['urls']) {
+				$out .= '<urls><related-urls>';
+					foreach ($ref['urls'] as $url)
+						$out .= '<url><style face="normal" font="default" size="100%">' . $url . '</style></url>';
+				$out .= '</related-urls></urls>';
+			}
+
 			$out .= '<research-notes><style face="normal" font="default" size="100%">' . (isset($ref['notes']) && $ref['notes'] ? $ref['notes'] : '') . '</style></research-notes>';
 
 			$out .= '</record>';
 			$number++;
 		}
-		echo '</records></xml>';
+		$out .= '</records></xml>';
+		return $out;
 	}
 
 	/**
