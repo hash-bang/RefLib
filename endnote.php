@@ -31,6 +31,11 @@ class PHPEndNote {
 	*/
 	var $refs;
 
+	// Constructor
+	function __construct() {
+		$this->refs = array();
+	}
+
 	/**
 	* Add a reference to the $refs array
 	* This function also expands simple strings into arrays (suported: author => authors, url => urls)
