@@ -31,9 +31,17 @@ class PHPEndNote {
 	*/
 	var $refs;
 
+	/**
+	* The internal name to call the file
+	* As far as I am aware this does not actually serve a purpose but EndNote refuses to import the file unless its specified
+	* @var string;
+	*/
+	var $name;
+
 	// Constructor
 	function __construct() {
 		$this->refs = array();
+		$this->name = 'EndNote.enl';
 	}
 
 	/**
@@ -63,7 +71,7 @@ class PHPEndNote {
 		$number = 0;
 		foreach ($this->refs as $id => $ref) {
 			$out .= '<record>';
-			$out .= '<database name="CREBP-SearchTool.enl" path="C:\CREBP-SearchTool.enl">CREBP-SearchTool.enl</database>';
+			$out .= '<database name="' . $this->name . '" path="C:\\' . $this->name . '">' . $this->name . '</database>';
 			$out .= '<source-app name="EndNote" version="16.0">EndNote</source-app>';
 			$out .= '<rec-number>' . $number . '</rec-number>';
 			$out .= '<foreign-keys><key app="EN" db-id="s55prpsswfsepue0xz25pxai2p909xtzszzv">' . $number . '</key></foreign-keys>';
