@@ -27,6 +27,7 @@ class PHPEndNote {
 	*	* notes - String (optional)
 	*	* isbn - String (optional)
 	*	* label - String (optional)
+	*	* caption - String (optional)
 	*
 	* @var array
 	*/
@@ -101,6 +102,7 @@ class PHPEndNote {
 				'abstract' => 'abstract',
 				'isbn' => 'isbn',
 				'label' => 'label',
+				'caption' => 'caption',
 			) as $enkey => $ourkey)
 				$out .= "<$enkey><style face=\"normal\" font=\"default\" size=\"100%\">" . (isset($ref[$ourkey]) && $ref[$ourkey] ? $ref[$ourkey] : '') . "</style></$enkey>";
 
@@ -174,6 +176,8 @@ class PHPEndNote {
 				'isbn' => 'isbn',
 				'notes' => 'notes',
 				'research-notes' => 'notes',
+				'label' => 'label',
+				'caption' => 'caption',
 			) as $enkey => $ourkey) {
 				if (! $find = $record->xpath("$enkey/style/text()") )
 					continue;
