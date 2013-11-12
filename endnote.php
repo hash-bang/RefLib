@@ -144,7 +144,8 @@ class PHPEndNote {
 				'custom6' => 'custom6',
 				'custom7' => 'custom7',
 			) as $enkey => $ourkey)
-				$out .= "<$enkey><style face=\"normal\" font=\"default\" size=\"100%\">" . (isset($ref[$ourkey]) && $ref[$ourkey] ? $this->_export($ref[$ourkey]) : '') . "</style></$enkey>";
+				if (isset($ref[$ourkey]) && $ref[$ourkey])
+					$out .= "<$enkey><style face=\"normal\" font=\"default\" size=\"100%\">" . $this->_export($ref[$ourkey]) . "</style></$enkey>";
 
 			$out .= '<dates>';
 				$out .= '<year><style face="normal" font="default" size="100%">' . (isset($ref['year']) && $ref['year'] ? $this->_export($ref['year']) : '') . '</style></year>';
