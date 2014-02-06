@@ -290,6 +290,8 @@ class PHPEndNote {
 				}
 			}
 		}
+		if ($this->refId == 'rec-number') // Resort by keys so that everything is in order
+			ksort($this->refs);
 	}
 
 	function SetXMLFile($filename) {
