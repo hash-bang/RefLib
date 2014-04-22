@@ -1,2 +1,3 @@
 test:
-	php -f test.php
+	php -f tests/fix-date.php
+	php -f tests/endnotexml.php

@@ -1,8 +1,7 @@
 <?
-require('endnote.php');
+require_once(dirname(__FILE__) . "/../reflib.php");
 
-// Test PHPEndNote->FixDate() {{{
-$e = new PHPEndNote();
+$e = new RefLib();
 foreach (array(
 	'19-19' => '19',
 	'24-24s' => 'S24',
@@ -26,4 +25,3 @@ foreach (array(
 	$return = $ref['pages'];
 	echo ($return == $correct ? 'PASS' : 'FAIL') . " - Given [$pages], Returned [$return], Correct [$correct]\n";
 }
-// }}}
