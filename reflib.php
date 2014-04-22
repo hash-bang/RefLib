@@ -109,6 +109,22 @@ class RefLib {
 		$this->driver = new $driverName();
 		$this->driver->parent = $this;
 	}
+
+	/**
+	* Tries to identify the correct driver to use based on an array of data
+	* @param array $types,... An array of known data about the file. Usually this is the file extension (if any) and mime type
+	* @return string Either a suitable driver name or boolean false
+	*/
+	function IdentifyDriver() {
+		$types = func_get_args();
+		foreach ($types as $type) {
+			switch ($type) {
+				case 'xml':
+				case 'text/xml':
+					return 'endnotexml';
+			}
+		}
+	}
 	// }}}
 
 	// Adders / removers {{{
@@ -162,15 +178,19 @@ class RefLib {
 		return $this->SetContentsFile($filename);
 	}
 
-	function SetContentsFile($filename) {
-		switch (pathinfo($filename, PATHINFO_EXTENSION)) {
-			case 'xml':
-				$this->LoadDriver('endnotexml');
-				break;
-			default:
-				trigger_error("Unknown driver type for filename '$filename'");
+	/**
+	* Set the BLOB contents of the incomming citation library from a file
+	* This function will also attempt to identify the correct driver to use (via IdentifyDriver())
+	* @param string $filename The actual file path to load
+	* @param string $mime Optional mime type informaton if the filename doesnt provide anything helpful (such as it originating from $_FILE)
+	*/
+	function SetContentsFile($filename, $mime = null) {
+		if ($driver = $this->IdentifyDriver(pathinfo($filename, PATHINFO_EXTENSION), $mime)) {
+			$this->LoadDriver($driver);
+			$this->driver->SetContents(file_get_contents($filename));
+		} else {
+			trigger_error("Unknown driver type for filename '$filename'");
 		}
-		$this->driver->SetContents(file_get_contents($filename));
 	}
 	// }}}
 
