@@ -1,6 +1,12 @@
-PHP-EndNote
-===========
+RefLib
+======
 PHP module for managing a variety of citation reference libraries.
+
+At present this library can read/write the following citation library formats:
+
+* EndNote (XML)
+* RIS (under testing, coming soon)
+
 
 Installation
 ------------
