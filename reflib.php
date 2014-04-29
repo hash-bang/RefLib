@@ -128,6 +128,7 @@ class RefLib {
 		return array(
 			'endnotexml' => 'EndNote XML',
 			'ris' => 'RIS',
+			'csv' => 'CSV - Excel Export',
 		);
 	}
 
@@ -145,6 +146,9 @@ class RefLib {
 					return 'endnotexml';
 				case 'ris':
 					return 'ris';
+				case 'csv':
+				case 'text/csv':
+					return 'csv';
 			}
 		}
 	}
