@@ -104,6 +104,8 @@ class RefLib_csv {
 					if ($field)
 						$ref[$field] = $csv[$offset];
 
+				if (isset($ref['authors']))
+					$ref['authors'] = $this->parent->ReJoin($ref['authors']);
 				// Append to $this->parent->refs {{{
 				if (!$this->parent->refId) { // Use indexed array
 					$this->parent->refs[] = $ref;
