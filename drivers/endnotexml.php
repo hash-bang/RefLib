@@ -149,10 +149,10 @@ class RefLib_endnotexml {
 				'title' => '',
 			);
 			foreach ($record->xpath('contributors/authors/author/style/text()') as $authors) 
-				$ref['authors'][] = end($authors);
+				$ref['authors'][] = $this->_GetText($authors);
 
 			foreach ($record->xpath('urls/related-urls/url/style/text()') as $url) 
-				$ref['urls'][] = end($url);
+				$ref['urls'][] = $this->_GetText($url);
 
 			if ($find = $record->xpath("titles/title/style/text()"))
 				$ref['title'] = $this->_GetText($find);
