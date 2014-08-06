@@ -92,7 +92,7 @@ class RefLib_endnotexml {
 				'auth-address' => 'address',
 				'pages' => 'pages',
 				'volume' => 'volume',
-				'number' => 'number',
+				'number' => 'number', // issue #
 				'section' => 'section',
 				'abstract' => 'abstract',
 				'isbn' => 'isbn',

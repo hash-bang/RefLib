@@ -38,6 +38,7 @@ class RefLib_ris {
 		'ST' => 'title-short',
 		'TI' => 'title',
 		'VL' => 'volume',
+        'IS' => 'number' // Issue #
 	);
 
 	/**
