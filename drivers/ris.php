@@ -115,22 +115,30 @@ class RefLib_ris {
 
 			$rawref = array();
 			preg_match_all('!^([A-Z]{2})  - (.*)$!m', $match[2], $rawrefextracted, PREG_SET_ORDER);
-			foreach ($rawrefextracted as $rawrefbit)
-				$rawref[$rawrefbit[1]] = $rawrefbit[2];
+			foreach ($rawrefextracted as $rawrefbit) {
+                // key/val mappings
+                if (isset($this->_mapHash[$rawrefbit[1]])) {
+                    $ref[$this->_mapHash[$rawrefbit[1]]] = $rawrefbit[2];
+                    continue;
+                }
 
-			// Simple key/val mappings {{{
-			foreach ($this->_mapHash as $ris => $reflib)
-				if (isset($rawref[$ris]))
-					$ref[$reflib] = $rawref[$ris];
-			// }}}
-			// Simple key/val(array) mappings {{{
-			foreach ($this->_mapHashArray as $ris => $reflib) {
-				if (isset($rawref[$ris])) {
-					if (!isset($ref[$reflib]))
-						$ref[$reflib] = array();
-					$ref[$reflib][] = $rawref[$ris];
-				}
+                // key/val(array) mappings
+                if (isset($this->_mapHashArray[$rawrefbit[1]])) {
+                    $ref[$this->_mapHashArray[$rawrefbit[1]]][] = $rawrefbit[2];
+                    continue;
+                }
+
+                // unknowns go to $rawref to be handled later
+                if (isset($rawref[$rawrefbit[1]])) {
+                    if (!is_array($rawref[$rawrefbit[1]])) {
+                        $rawref[$rawrefbit[1]] = array($rawref[$rawrefbit[1]]);
+                    }
+                    $rawref[$rawrefbit[1]][] = $rawrefbit[2];
+                } else {
+                    $rawref[$rawrefbit[1]] = $rawrefbit[2];
+                }
 			}
+
 			// }}}
 			// Pages {{{
 			if (isset($rawref['SP']) && isset($rawref['EP'])) {
@@ -148,9 +156,6 @@ class RefLib_ris {
 					$ref['date'] = strtotime("{$date[1]}-{$date[2]}-01");
 				} elseif (preg_match('!([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/!', $rawref['PY'], $date)) // Full date
 					$ref['date'] = strtotime("{$date[1]}-{$date[2]}-{$date[1]}");
-			// }}}
-			if (isset($ref['authors']))
-				$ref['authors'] = implode(' AND ', $ref['authors']);
 
 			// Append to $this->parent->refs {{{
 			if (!$this->parent->refId) { // Use indexed array
