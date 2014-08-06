@@ -117,7 +117,7 @@ class RefLib_ris {
 			$ref = array('type' => strtolower($match[1]));
 
 			$rawref = array();
-			preg_match_all('!^([A-Z]{2})  - (.*)$!m', $match[2], $rawrefextracted, PREG_SET_ORDER);
+			preg_match_all('!^([A-Z0-9]{2})  - (.*)$!m', $match[2], $rawrefextracted, PREG_SET_ORDER);
 			foreach ($rawrefextracted as $rawrefbit) {
                 // key/val mappings
                 if (isset($this->_mapHash[$rawrefbit[1]])) {
