@@ -36,8 +36,10 @@ class RefLib_ris {
 		'SE' => 'section',
 		'SN' => 'isbn',
 		'ST' => 'title-short',
-		'TI' => 'title',
+		'T1' => 'title', // The spec is publidshed in san-serif; T[ONE] is correct
+		'TI' => 'title', // The spec is publidshed in san-serif
 		'VL' => 'volume',
+		'PY' => 'year',
         'IS' => 'number' // Issue #
 	);
 
