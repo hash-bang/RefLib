@@ -17,9 +17,9 @@ class RefLib {
 	*	* title-secondary - String (optional)
 	*	* title-short - String (optional)
 	*	* periodical-title - String (optional)
-	* 	* pages - String (optional)
+	*	* pages - String (optional)
 	*	* volume - String (optional)
-	*	* number - String (optional)
+	*	* number - String (optional) - Issue #
 	*	* section - String (optional)
 	*	* year - String (optional) - Four digit year number e.g. '2014'
 	*	* date - String (optional) - Unix epoc
