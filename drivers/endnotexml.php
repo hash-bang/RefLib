@@ -107,6 +107,7 @@ class RefLib_endnotexml {
 			// EndNote field on left, RefLib on right
 			foreach (array(
 				'access-date' => 'access-date',
+				'accession-num' => 'accession-num',
 				'auth-address' => 'address',
 				'electronic-resource-num' => 'doi',
 				'pages' => 'pages',
@@ -198,8 +199,10 @@ class RefLib_endnotexml {
 			}
 
 			// Simple key=>vals
+			// EndNote on left, RefLib on right
 			foreach (array(
 				'access-date' => 'access-date',
+				'accession-num' => 'accession-num',
 				'auth-address' => 'address',
 				'electronic-resource-num' => 'doi',
 				'pages' => 'pages',

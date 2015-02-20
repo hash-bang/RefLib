@@ -18,6 +18,7 @@ class RefLib {
 	*	* title-secondary - String (optional)
 	*	* alt-journal - String (optional)
 	*	* title-short - String (optional)
+	*	* accension-num - String (optional)
 	*	* periodical-title - String (optional)
 	*	* pages - String (optional)
 	*	* type - String (optional) see $refTypes
