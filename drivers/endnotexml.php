@@ -104,9 +104,11 @@ class RefLib_endnotexml {
 				$out .= '<periodical><full-title><style face="normal" font="default" size="100%">' . (isset($ref['periodical-title']) && $ref['periodical-title'] ? $this->_export($ref['periodical-title']) : '') . '</style></full-title></periodical>';
 
 			// Simple key values
+			// EndNote field on left, RefLib on right
 			foreach (array(
 				'access-date' => 'access-date',
 				'auth-address' => 'address',
+				'electronic-resource-num' => 'doi',
 				'pages' => 'pages',
 				'volume' => 'volume',
 				'number' => 'number', // issue #
@@ -199,6 +201,7 @@ class RefLib_endnotexml {
 			foreach (array(
 				'access-date' => 'access-date',
 				'auth-address' => 'address',
+				'electronic-resource-num' => 'doi',
 				'pages' => 'pages',
 				'volume' => 'volume',
 				'number' => 'number',
