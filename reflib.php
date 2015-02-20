@@ -15,6 +15,7 @@ class RefLib {
 	*	* contact-email - String (optional)
 	*	* title - String
 	*	* title-secondary - String (optional)
+	*	* alt-journal - String (optional)
 	*	* title-short - String (optional)
 	*	* periodical-title - String (optional)
 	*	* pages - String (optional)

@@ -97,6 +97,8 @@ class RefLib_endnotexml {
 				$out .= '<secondary-title><style face="normal" font="default" size="100%">' . (isset($ref['title-secondary']) && $ref['title-secondary'] ? $this->_export($ref['title-secondary']) : '') . '</style></secondary-title>';
 				if (isset($ref['title-short']) && $ref['title-short'])
 					$out .= '<short-title><style face="normal" font="default" size="100%">' . $this->_export($ref['title-short']) . '</style></short-title>';
+				if (isset($ref['alt-journal']) && $ref['alt-journal'])
+					$out .= '<alt-title><style face="normal" font="default" size="100%">' . $this->_export($ref['alt-journal']) . '</style></alt-title>';
 			$out .= '</titles>';
 
 				$out .= '<periodical><full-title><style face="normal" font="default" size="100%">' . (isset($ref['periodical-title']) && $ref['periodical-title'] ? $this->_export($ref['periodical-title']) : '') . '</style></full-title></periodical>';
@@ -176,6 +178,8 @@ class RefLib_endnotexml {
 				$ref['title-secondary'] = $this->_GetText($find);
 			if ($find = $record->xpath("titles/short-title/style/text()"))
 				$ref['title-short'] = $this->_GetText($find);
+			if ($find = $record->xpath("titles/alt-title/style/text()"))
+				$ref['alt-journal'] = $this->_GetText($find);
 			if ($find = $record->xpath("periodical/full-title/style/text()"))
 				$ref['periodical-title'] = $this->_GetText($find);
 			if ($find = $record->xpath("dates/year/style/text()"))
