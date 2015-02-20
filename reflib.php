@@ -37,6 +37,7 @@ class RefLib {
 	*	* label - String (optional)
 	*	* caption - String (optional)
 	*	* language - String (optional)
+	*	* work-type - String (optional)
 	*	* custom{1..7} - String (optional)
 	*
 	* @var array
