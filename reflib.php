@@ -13,6 +13,8 @@ class RefLib {
 	*	* address - String (optional)
 	*	* contact-name - String (optional)
 	*	* contact-email - String (optional)
+	*	* database - String (optional)
+	*	* database-provier - String (optional)
 	*	* doi - String (optional)
 	*	* title - String
 	*	* title-secondary - String (optional)
