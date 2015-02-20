@@ -144,6 +144,13 @@ class RefLib_endnotexml {
 				$out .= '</related-urls></urls>';
 			}
 
+			if (isset($ref['keywords']) && $ref['keywords']) {
+				$out .= '<keywords>';
+					foreach ((array) $ref['keywords'] as $keyword)
+						$out .= '<keyword><style face="normal" font="default" size="100%">' . $this->_export($keyword) . '</style></keyword>';
+				$out .= '</keywords>';
+			}
+
 			$out .= '</record>';
 			$number++;
 		}
@@ -174,6 +181,12 @@ class RefLib_endnotexml {
 
 			foreach ($record->xpath('urls/related-urls/url/style/text()') as $url) 
 				$ref['urls'][] = $this->_GetText($url);
+
+			if ($record->xpath('keywords')) {
+				$ref['keywords'] = array();
+				foreach ($record->xpath('keywords/keyword/style/text()') as $keyword) 
+					$ref['keywords'][] = $this->_GetText($keyword);
+			}
 
 			if ($find = $record->xpath("titles/title/style/text()"))
 				$ref['title'] = $this->_GetText($find);
