@@ -18,6 +18,7 @@ class RefLib {
 	*	* title-short - String (optional)
 	*	* periodical-title - String (optional)
 	*	* pages - String (optional)
+	*	* type - String (optional) see $refTypes
 	*	* volume - String (optional)
 	*	* number - String (optional) - Issue #
 	*	* section - String (optional)

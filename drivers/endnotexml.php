@@ -25,6 +25,17 @@ class RefLib_endnotexml {
 	var $endNoteFile = 'EndNote.enl';
 
 	/**
+	* Reference type lookup table
+	* Key is the human EndNote string, value is the EndNote int value
+	* @var array
+	*/
+	var $refTypes = array(
+		'Electronic Article' => 43,
+		'Journal Article' => 17,
+		'Map' => 20,
+	);
+
+	/**
 	* Escpe a string in an EndNote compatible way
 	* @param string $string The string to be escaped
 	* @return string The escaped string
@@ -70,7 +81,11 @@ class RefLib_endnotexml {
 			$out .= '<source-app name="EndNote" version="16.0">EndNote</source-app>';
 			$out .= '<rec-number>' . $number . '</rec-number>';
 			$out .= '<foreign-keys><key app="EN" db-id="s55prpsswfsepue0xz25pxai2p909xtzszzv">' . $number . '</key></foreign-keys>';
-			$out .= '<ref-type name="Journal Article">17</ref-type>';
+			if ($ref['type'] && isset($this->refTypes[$ref['type']]) ) {
+				$out .= "<ref-type name=\"{$ref['type']}\">{$this->refTypes[$ref['type']]}</ref-type>";
+			} else {
+				$out .= '<ref-type name="Journal Article">17</ref-type>';
+			}
 
 			$out .= '<contributors><authors>';
 				foreach ($ref['authors'] as $author)
@@ -167,6 +182,14 @@ class RefLib_endnotexml {
 				$ref['year'] = $this->_GetText($find);
 			if ($find = $record->xpath("dates/pub-dates/date/style/text()"))
 				$ref['date'] = $this->parent->ToEpoc($this->_GetText($find), $ref);
+			if ($find = $record->xpath("ref-type/text()")) {
+				$typesFlipped = array_flip($this->refTypes);
+				if (isset($typesFlipped[$this->_GetText($find)])) {
+					$ref['type'] = $typesFlipped[$this->_GetText($find)];
+				} else {
+					die('UNKNOWN: ' . $this->_GetText($find));
+				}
+			}
 
 			// Simple key=>vals
 			foreach (array(
