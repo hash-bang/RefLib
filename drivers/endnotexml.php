@@ -35,6 +35,7 @@ class RefLib_endnotexml {
 		'Journal Article' => 17,
 		'Map' => 20,
 		'Report' => 27,
+		'Thesis' => 32,
 		'Unpublished Work' => 34,
 	);
 
