@@ -31,6 +31,7 @@ class RefLib_endnotexml {
 	*/
 	var $refTypes = array(
 		'Book Section' => 5,
+		'Book' => 6,
 		'Electronic Article' => 43,
 		'Journal Article' => 17,
 		'Map' => 20,
