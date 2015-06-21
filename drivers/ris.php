@@ -40,7 +40,7 @@ class RefLib_ris {
 		'TI' => 'title', // The spec is publidshed in san-serif
 		'VL' => 'volume',
 		'PY' => 'year',
-        'IS' => 'number' // Issue #
+		'IS' => 'number' // Issue #
 	);
 
 	/**

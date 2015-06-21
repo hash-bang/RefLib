@@ -125,7 +125,7 @@ class RefLib_endnotexml {
 			$out .= '<source-app name="EndNote" version="16.0">EndNote</source-app>';
 			$out .= '<rec-number>' . $number . '</rec-number>';
 			$out .= '<foreign-keys><key app="EN" db-id="s55prpsswfsepue0xz25pxai2p909xtzszzv">' . $number . '</key></foreign-keys>';
-			if ($ref['type'] && isset($this->refTypes[$ref['type']]) ) {
+			if (isset($ref['type']) && $ref['type'] && isset($this->refTypes[$ref['type']]) ) {
 				$out .= "<ref-type name=\"{$ref['type']}\">{$this->refTypes[$ref['type']]}</ref-type>";
 			} else {
 				$out .= '<ref-type name="Journal Article">17</ref-type>';
