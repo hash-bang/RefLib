@@ -35,7 +35,7 @@ Write EndNote XML
 	require('reflib.php');
 	$lib = new RefLib();
 	$lib->SetContentsFile('tests/data/endnote.xml'); // Read in content (or populate $lib->refs yourself)
-	$lib->OutputXML('EndNote File.xml'); // Output file to the browser
+	$lib->GetContents('EndNote File.xml'); // Output file to the browser
 
 
 File conversion
@@ -44,4 +44,4 @@ File conversion
 	require('reflib.php');
 	$lib = new RefLib();
 	$lib->SetContentsFile('tests/data/endnote.xml'); // Read in content (or populate $lib->refs yourself)
-	$lib->OutputXML('EndNote File.ris'); // Output file to the browser in RIS format
+	$lib->GetContents('EndNote File.ris'); // Output file to the browser in RIS format
