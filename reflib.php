@@ -137,6 +137,7 @@ class RefLib {
 			'endnotexml' => 'EndNote XML',
 			'ris' => 'RIS',
 			'csv' => 'CSV - Excel Export',
+			'nbib'=> 'MEDLINE (nbib)'
 		);
 	}
 
@@ -157,16 +158,23 @@ class RefLib {
 				case 'csv':
 				case 'text/csv':
 					return 'csv';
+				case 'medline':
+				case 'nbib':
+					return 'medline';
 				default: // General file
 					if (is_file($type)) {
 						if ( function_exists('mime_content_type') && $mime = mime_content_type($type) ) {
 							if ($type == 'text/csv')
 								return 'csv';
+							if ($type == 'application/nbib')
+								return 'medline';
 						}
 						// Still no idea - try internal tests
 						$preview = $this->_SlurpPeek($type);
 						if (preg_match('/^TY  - /ms', $preview))
 							return 'ris';
+						if (preg_match('/^PMID- /ms', $preview))
+							return 'medline';
 					}
 			}
 		}
