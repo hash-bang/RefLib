@@ -134,8 +134,11 @@ class RefLib_medline {
 					$out .= "$key- " . $this->Escape($ref[$v]) . "\n";
 					unset($ref[$v]); // Remove it from the reference copy so we dont process it twice
 				}
-			if (isset($ref['date']) && $date = $this->parent->ToDate($ref['date'], '/', true))
-				$out .= "DP  - $date/\n";
+			if (isset($ref['date']) && $date = $this->parent->ToDate($ref['date'], '/', true)){
+				$out .= "DP  - $date\n";
+			} else if (isset($ref['year'])) {
+				$out .= "DP  - " . $ref['year'] . "\n";
+			}
 			if (isset($ref['doi'])){
 				$out .= "AID - " . $ref['doi'] . " [doi]\n";
 			}
