@@ -123,19 +123,21 @@ class RefLib_medline {
 			$out .= "\r\n";
 			foreach ($this->_mapHashArray as $k => $v)
 				if (isset($ref[$v])) {
+					$key = str_pad($k, 4, " ");
 					foreach ((array) $ref[$v] as $val)
-						$out .= "$k  - " . $this->Escape($val) . "\n";
+						$out .= "$key- " . $this->Escape($val) . "\n";
 					unset($ref[$v]); // Remove it from the reference copy so we dont process it twice
 				}
 			foreach ($this->_mapHash as $k => $v)
 				if (isset($ref[$v])) {
-					$out .= "$k  - " . $this->Escape($ref[$v]) . "\n";
+					$key = str_pad($k, 4, " ");
+					$out .= "$key- " . $this->Escape($ref[$v]) . "\n";
 					unset($ref[$v]); // Remove it from the reference copy so we dont process it twice
 				}
 			if (isset($ref['date']) && $date = $this->parent->ToDate($ref['date'], '/', true))
 				$out .= "DP  - $date/\n";
 			if (isset($ref['doi'])){
-				$out .= "AID  - $doi [doi]/\n";
+				$out .= "AID - " . $ref['doi'] . " [doi]\n";
 			}
 			$out .= "\r\n";
 		}
