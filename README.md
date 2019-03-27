@@ -1,5 +1,8 @@
 RefLib
 ======
+
+**NOTICE: This module is depreciated in favour of the newer [RefLib NPM](https://github.com/hash-bang/Reflib-Node). Please use that project instead.**
+
 PHP module for managing a variety of citation reference libraries.
 
 At present this library can read/write the following citation library formats:
